@@ -1,5 +1,5 @@
 
-import { NFe } from "../types/nfe";
+import { NFe, ReportIssue } from "../types/nfe";
 
 // Mock data for demonstration purposes
 const mockNFes: NFe[] = [
@@ -15,6 +15,7 @@ const mockNFes: NFe[] = [
     valor: 1250.75,
     status: "Autorizada",
     relatorios: {
+      sistema: true,
       sped: true,
       efd: true,
       ciap: false,
@@ -33,6 +34,7 @@ const mockNFes: NFe[] = [
     valor: 3450.00,
     status: "Autorizada",
     relatorios: {
+      sistema: true,
       sped: true,
       efd: false,
       ciap: true,
@@ -51,6 +53,7 @@ const mockNFes: NFe[] = [
     valor: 567.90,
     status: "Cancelada",
     relatorios: {
+      sistema: true,
       sped: false,
       efd: false,
       ciap: false,
@@ -69,6 +72,7 @@ const mockNFes: NFe[] = [
     valor: 12789.55,
     status: "Autorizada",
     relatorios: {
+      sistema: true,
       sped: true,
       efd: true,
       ciap: true,
@@ -87,6 +91,7 @@ const mockNFes: NFe[] = [
     valor: 789.30,
     status: "Denegada",
     relatorios: {
+      sistema: false,
       sped: false,
       efd: false,
       ciap: false,
@@ -95,10 +100,78 @@ const mockNFes: NFe[] = [
   },
 ];
 
+// Mock data para as inconsistências de relatórios
+const mockReportIssues: ReportIssue[] = [
+  {
+    id: "1",
+    tipo: "Faltante",
+    notaId: "1",
+    numeroNota: "000000001",
+    descricao: "Nota presente no sistema mas ausente no CIAP",
+    origem: "sistema",
+    dataCriacao: "2023-05-15",
+    status: "Aberto"
+  },
+  {
+    id: "2",
+    tipo: "Duplicada",
+    notaId: "2",
+    numeroNota: "000000002",
+    descricao: "Nota duplicada no SPED Fiscal",
+    origem: "sped",
+    dataCriacao: "2023-05-16",
+    status: "EmAnalise"
+  },
+  {
+    id: "3",
+    tipo: "ValorDivergente",
+    notaId: "4",
+    numeroNota: "000000004",
+    descricao: "Valor da nota difere entre Sistema e EFD-Contribuições",
+    origem: "sistema",
+    destino: "efd",
+    valor: 12789.55,
+    valorReal: 12879.55,
+    dataCriacao: "2023-05-19",
+    status: "Aberto"
+  },
+  {
+    id: "4",
+    tipo: "Faltante",
+    notaId: "5",
+    numeroNota: "000000005",
+    descricao: "Nota não encontrada no Sistema",
+    origem: "sped",
+    dataCriacao: "2023-05-21",
+    status: "Resolvido"
+  },
+  {
+    id: "5",
+    tipo: "ValorDivergente",
+    notaId: "3",
+    numeroNota: "000000003",
+    descricao: "Valor divergente entre Sistema e Livros Fiscais",
+    origem: "sistema",
+    destino: "livrosFiscais",
+    valor: 567.90,
+    valorReal: 576.90,
+    dataCriacao: "2023-05-17",
+    status: "Resolvido"
+  }
+];
+
 export const fetchNFes = (): Promise<NFe[]> => {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(mockNFes);
+    }, 500);
+  });
+};
+
+export const fetchReportIssues = (): Promise<ReportIssue[]> => {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(mockReportIssues);
     }, 500);
   });
 };

@@ -14,6 +14,7 @@ export interface NFe {
 }
 
 export interface ReportStatus {
+  sistema: boolean;
   sped: boolean;
   efd: boolean;
   ciap: boolean;
@@ -23,8 +24,23 @@ export interface ReportStatus {
 export type ReportType = keyof ReportStatus;
 
 export const reportLabels: Record<ReportType, string> = {
+  sistema: "Sistema",
   sped: "SPED Fiscal",
   efd: "EFD-Contribuições",
   ciap: "CIAP",
   livrosFiscais: "Livros Fiscais",
 };
+
+export interface ReportIssue {
+  id: string;
+  tipo: "Duplicada" | "Faltante" | "ValorDivergente";
+  notaId: string;
+  numeroNota: string;
+  descricao: string;
+  origem: ReportType;
+  destino?: ReportType;
+  valor?: number;
+  valorReal?: number;
+  dataCriacao: string;
+  status: "Aberto" | "EmAnalise" | "Resolvido";
+}

@@ -56,11 +56,15 @@ export const NFETable = ({ nfes }: NFETableProps) => {
                 <TableHead className="text-right">Valor</TableHead>
                 <TableHead>Data</TableHead>
                 <TableHead>Status</TableHead>
-                {Object.keys(reportLabels).map((report) => (
-                  <TableHead key={report} className="text-center">
-                    {reportLabels[report as ReportType]}
-                  </TableHead>
-                ))}
+                <TableHead className="text-center">Sistema</TableHead>
+                {Object.keys(reportLabels)
+                  .filter(report => report !== 'sistema')
+                  .map((report) => (
+                    <TableHead key={report} className="text-center">
+                      {reportLabels[report as ReportType]}
+                    </TableHead>
+                  ))
+                }
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -87,19 +91,28 @@ export const NFETable = ({ nfes }: NFETableProps) => {
                     <TableCell>
                       <StatusBadge status={nfe.status} />
                     </TableCell>
-                    {Object.keys(reportLabels).map((report) => (
-                      <TableCell key={report} className="text-center">
-                        <StatusBadge 
-                          status={nfe.relatorios[report as ReportType]} 
-                          className="w-20"
-                        />
-                      </TableCell>
-                    ))}
+                    <TableCell className="text-center">
+                      <StatusBadge 
+                        status={nfe.relatorios.sistema} 
+                        className="w-20"
+                      />
+                    </TableCell>
+                    {Object.keys(nfe.relatorios)
+                      .filter(report => report !== 'sistema')
+                      .map((report) => (
+                        <TableCell key={report} className="text-center">
+                          <StatusBadge 
+                            status={nfe.relatorios[report as ReportType]} 
+                            className="w-20"
+                          />
+                        </TableCell>
+                      ))
+                    }
                   </TableRow>
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={7 + Object.keys(reportLabels).length} className="text-center py-6 text-gray-500">
+                  <TableCell colSpan={8} className="text-center py-6 text-gray-500">
                     Nenhuma nota fiscal encontrada
                   </TableCell>
                 </TableRow>

@@ -1,7 +1,11 @@
 
 import { FileCheck } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 
 export const Navbar = () => {
+  const location = useLocation();
+  const path = location.pathname;
+
   return (
     <header className="bg-white border-b border-gray-200">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
@@ -12,24 +16,36 @@ export const Navbar = () => {
         <nav>
           <ul className="flex space-x-6">
             <li>
-              <a href="#" className="text-sm font-medium text-nfe-slate hover:text-nfe-blue">
+              <Link 
+                to="/" 
+                className={`text-sm font-medium ${path === "/" ? "text-nfe-royal" : "text-nfe-slate hover:text-nfe-blue"}`}
+              >
                 Dashboard
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-sm font-medium text-nfe-royal">
+              <Link
+                to="/analise" 
+                className={`text-sm font-medium ${path === "/analise" ? "text-nfe-royal" : "text-nfe-slate hover:text-nfe-blue"}`}
+              >
                 Análise de Notas
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-sm font-medium text-nfe-slate hover:text-nfe-blue">
+              <Link
+                to="/relatorios" 
+                className={`text-sm font-medium ${path === "/relatorios" ? "text-nfe-royal" : "text-nfe-slate hover:text-nfe-blue"}`}
+              >
                 Relatórios
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#" className="text-sm font-medium text-nfe-slate hover:text-nfe-blue">
+              <Link
+                to="/configuracoes" 
+                className={`text-sm font-medium ${path === "/configuracoes" ? "text-nfe-royal" : "text-nfe-slate hover:text-nfe-blue"}`}
+              >
                 Configurações
-              </a>
+              </Link>
             </li>
           </ul>
         </nav>
