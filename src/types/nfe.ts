@@ -9,7 +9,9 @@ export interface NFe {
   cnpjDestinatario: string;
   nomeDestinatario: string;
   valor: number;
+  valorFrete?: number;
   status: "Autorizada" | "Cancelada" | "Denegada";
+  tributos?: NFeTributos;
   relatorios: ReportStatus;
 }
 

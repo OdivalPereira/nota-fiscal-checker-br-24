@@ -13,7 +13,30 @@ const mockNFes: NFe[] = [
     cnpjDestinatario: "08.123.456/0001-78",
     nomeDestinatario: "CLIENTE LTDA",
     valor: 1250.75,
+    valorFrete: 45.50,
     status: "Autorizada",
+    tributos: {
+      icms: {
+        baseCalculo: 1250.75,
+        aliquotaMedia: 18,
+        valor: 225.14
+      },
+      pis: {
+        baseCalculo: 1250.75,
+        aliquota: 1.65,
+        valor: 20.64
+      },
+      cofins: {
+        baseCalculo: 1250.75,
+        aliquota: 7.6,
+        valor: 95.06
+      },
+      ipi: {
+        baseCalculo: 1000.75,
+        aliquota: 5,
+        valor: 50.04
+      }
+    },
     relatorios: {
       sistema: true,
       sped: true,
@@ -32,7 +55,25 @@ const mockNFes: NFe[] = [
     cnpjDestinatario: "09.876.543/0001-21",
     nomeDestinatario: "OUTRO CLIENTE ME",
     valor: 3450.00,
+    valorFrete: 120.00,
     status: "Autorizada",
+    tributos: {
+      icms: {
+        baseCalculo: 3450.00,
+        aliquotaMedia: 18,
+        valor: 621.00
+      },
+      pis: {
+        baseCalculo: 3450.00,
+        aliquota: 1.65,
+        valor: 56.93
+      },
+      cofins: {
+        baseCalculo: 3450.00,
+        aliquota: 7.6,
+        valor: 262.20
+      }
+    },
     relatorios: {
       sistema: true,
       sped: true,
@@ -52,6 +93,23 @@ const mockNFes: NFe[] = [
     nomeDestinatario: "DISTRIBUIDORA XYZ LTDA",
     valor: 567.90,
     status: "Cancelada",
+    tributos: {
+      icms: {
+        baseCalculo: 567.90,
+        aliquotaMedia: 18,
+        valor: 102.22
+      },
+      pis: {
+        baseCalculo: 567.90,
+        aliquota: 1.65,
+        valor: 9.37
+      },
+      cofins: {
+        baseCalculo: 567.90,
+        aliquota: 7.6,
+        valor: 43.16
+      }
+    },
     relatorios: {
       sistema: true,
       sped: false,
@@ -70,7 +128,35 @@ const mockNFes: NFe[] = [
     cnpjDestinatario: "12.345.678/0001-90",
     nomeDestinatario: "INDÚSTRIA ABC S.A.",
     valor: 12789.55,
+    valorFrete: 350.00,
     status: "Autorizada",
+    tributos: {
+      icms: {
+        baseCalculo: 12789.55,
+        aliquotaMedia: 18,
+        valor: 2302.12
+      },
+      pis: {
+        baseCalculo: 12789.55,
+        aliquota: 1.65,
+        valor: 211.03
+      },
+      cofins: {
+        baseCalculo: 12789.55,
+        aliquota: 7.6,
+        valor: 972.01
+      },
+      ipi: {
+        baseCalculo: 10000.00,
+        aliquota: 10,
+        valor: 1000.00
+      },
+      icmsst: {
+        baseCalculo: 14000.00,
+        aliquota: 4,
+        valor: 560.00
+      }
+    },
     relatorios: {
       sistema: true,
       sped: true,
@@ -90,6 +176,23 @@ const mockNFes: NFe[] = [
     nomeDestinatario: "COMÉRCIO VAREJO LTDA",
     valor: 789.30,
     status: "Denegada",
+    tributos: {
+      icms: {
+        baseCalculo: 789.30,
+        aliquotaMedia: 18,
+        valor: 142.07
+      },
+      pis: {
+        baseCalculo: 789.30,
+        aliquota: 1.65,
+        valor: 13.02
+      },
+      cofins: {
+        baseCalculo: 789.30,
+        aliquota: 7.6,
+        valor: 59.99
+      }
+    },
     relatorios: {
       sistema: false,
       sped: false,

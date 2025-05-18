@@ -55,6 +55,11 @@ export const NFETable = ({ nfes }: NFETableProps) => {
                 <TableHead>Emitente</TableHead>
                 <TableHead>Destinatário</TableHead>
                 <TableHead className="text-right">Valor</TableHead>
+                <TableHead className="text-right">ICMS</TableHead>
+                <TableHead className="text-right">IPI</TableHead>
+                <TableHead className="text-right">PIS</TableHead>
+                <TableHead className="text-right">COFINS</TableHead>
+                <TableHead className="text-right">Frete</TableHead>
                 <TableHead>Data</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-center">Sistema</TableHead>
@@ -92,6 +97,21 @@ export const NFETable = ({ nfes }: NFETableProps) => {
                     <TableCell className="text-right font-medium">
                       {formatCurrency(nfe.valor)}
                     </TableCell>
+                    <TableCell className="text-right">
+                      {nfe.tributos?.icms ? formatCurrency(nfe.tributos.icms.valor) : "-"}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {nfe.tributos?.ipi ? formatCurrency(nfe.tributos.ipi.valor) : "-"}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {nfe.tributos?.pis ? formatCurrency(nfe.tributos.pis.valor) : "-"}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {nfe.tributos?.cofins ? formatCurrency(nfe.tributos.cofins.valor) : "-"}
+                    </TableCell>
+                    <TableCell className="text-right">
+                      {nfe.valorFrete ? formatCurrency(nfe.valorFrete) : "-"}
+                    </TableCell>
                     <TableCell>{nfe.dataEmissao}</TableCell>
                     <TableCell>
                       <StatusBadge status={nfe.status} />
@@ -117,7 +137,7 @@ export const NFETable = ({ nfes }: NFETableProps) => {
                 ))
               ) : (
                 <TableRow>
-                  <TableCell colSpan={8} className="text-center py-6 text-gray-500">
+                  <TableCell colSpan={13} className="text-center py-6 text-gray-500">
                     Nenhuma nota fiscal encontrada
                   </TableCell>
                 </TableRow>
