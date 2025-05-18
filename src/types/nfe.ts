@@ -44,3 +44,68 @@ export interface ReportIssue {
   dataCriacao: string;
   status: "Aberto" | "EmAnalise" | "Resolvido";
 }
+
+export interface NFeProduto {
+  id: string;
+  codigo: string;
+  descricao: string;
+  ncm: string;
+  cfop: string;
+  quantidade: number;
+  valorUnitario: number;
+  valorTotal: number;
+  impostos: {
+    icms: {
+      cst: string;
+      baseCalculo: number;
+      aliquota: number;
+      valor: number;
+    };
+    pis: {
+      cst: string;
+      baseCalculo: number;
+      aliquota: number;
+      valor: number;
+    };
+    cofins: {
+      cst: string;
+      baseCalculo: number;
+      aliquota: number;
+      valor: number;
+    };
+    ipi?: {
+      cst: string;
+      baseCalculo: number;
+      aliquota: number;
+      valor: number;
+    };
+  };
+}
+
+export interface NFeTributos {
+  icms: {
+    baseCalculo: number;
+    aliquotaMedia: number;
+    valor: number;
+  };
+  pis: {
+    baseCalculo: number;
+    aliquota: number;
+    valor: number;
+  };
+  cofins: {
+    baseCalculo: number;
+    aliquota: number;
+    valor: number;
+  };
+  ipi?: {
+    baseCalculo: number;
+    aliquota: number;
+    valor: number;
+  };
+  icmsst?: {
+    baseCalculo: number;
+    aliquota: number;
+    valor: number;
+  };
+}

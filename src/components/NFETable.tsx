@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import {
   Table,
   TableBody,
@@ -71,7 +72,11 @@ export const NFETable = ({ nfes }: NFETableProps) => {
               {filteredNFEs.length > 0 ? (
                 filteredNFEs.map((nfe) => (
                   <TableRow key={nfe.id} className="hover:bg-gray-50">
-                    <TableCell className="font-medium">{nfe.numero}</TableCell>
+                    <TableCell className="font-medium">
+                      <Link to={`/analise/${nfe.id}`} className="text-nfe-blue hover:text-nfe-royal hover:underline">
+                        {nfe.numero}
+                      </Link>
+                    </TableCell>
                     <TableCell>
                       <div className="flex flex-col">
                         <span className="text-sm font-medium">{nfe.nomeEmitente}</span>
