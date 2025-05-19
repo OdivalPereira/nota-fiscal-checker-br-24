@@ -1,13 +1,21 @@
 
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { Navbar } from "@/components/Navbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { Filter, Table } from "lucide-react";
+import { NFETable } from "@/components/NFETable";
+import { fetchNFes } from "@/services/nfeService";
 
 const DashboardFiscal = () => {
   const [activeTab, setActiveTab] = useState("resumo");
+  
+  const { data: nfes, isLoading } = useQuery({
+    queryKey: ["nfes"],
+    queryFn: fetchNFes,
+  });
 
   return (
     <div className="min-h-screen flex flex-col bg-gray-50">
@@ -79,6 +87,7 @@ const DashboardFiscal = () => {
         <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
           <TabsList className="bg-white">
             <TabsTrigger value="resumo">Resumo</TabsTrigger>
+            <TabsTrigger value="notas">Notas Fiscais</TabsTrigger>
             <TabsTrigger value="sped">SPED Fiscal</TabsTrigger>
             <TabsTrigger value="efd">EFD-Contribuições</TabsTrigger>
             <TabsTrigger value="ciap">CIAP</TabsTrigger>
@@ -114,6 +123,17 @@ const DashboardFiscal = () => {
                 </Card>
               </div>
             </div>
+          </TabsContent>
+          
+          <TabsContent value="notas" className="bg-white border rounded-lg p-6">
+            <h2 className="text-lg font-semibold text-nfe-blue mb-4">Notas Fiscais</h2>
+            {isLoading ? (
+              <div className="flex justify-center items-center h-64">
+                <p className="text-gray-500">Carregando notas fiscais...</p>
+              </div>
+            ) : (
+              <NFETable nfes={nfes || []} />
+            )}
           </TabsContent>
           
           <TabsContent value="sped" className="bg-white border rounded-lg p-6">
