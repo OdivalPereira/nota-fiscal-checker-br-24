@@ -81,6 +81,11 @@ export interface NFeProduto {
       aliquota: number;
       valor: number;
     };
+    icmsst?: {
+      baseCalculo: number;
+      aliquota: number;
+      valor: number;
+    };
   };
 }
 
