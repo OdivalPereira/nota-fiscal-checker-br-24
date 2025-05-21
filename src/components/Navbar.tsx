@@ -1,5 +1,5 @@
 
-import { FileCheck, LayoutDashboard } from "lucide-react";
+import { FileText, LayoutDashboard, Calculator, Receipt, BookOpen, Users, Monitor, BriefcaseIcon } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 import {
   NavigationMenu,
@@ -31,32 +31,40 @@ export const Navbar = () => {
     <header className="bg-white border-b border-gray-200">
       <div className="container mx-auto px-4 py-3 flex items-center justify-between">
         <div className="flex items-center space-x-2">
-          <LayoutDashboard className="h-6 w-6 text-nfe-royal" />
+          <BriefcaseIcon className="h-6 w-6 text-nfe-royal" />
           <h1 className="text-lg font-semibold text-nfe-blue">Sistema Integrado</h1>
         </div>
         <NavigationMenu>
           <NavigationMenuList>
             <NavigationMenuItem>
               <Link to="/" className={getNavLinkClass("/")}>
-                Dashboard Geral
+                <div className="flex items-center gap-1">
+                  <LayoutDashboard className="h-4 w-4" />
+                  Dashboard Geral
+                </div>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuTrigger className={path.includes("/contabil") ? "text-nfe-royal" : ""}>
-                Contábil
+                <div className="flex items-center gap-1">
+                  <Calculator className="h-4 w-4" />
+                  Contábil
+                </div>
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="grid gap-3 p-4 w-[400px]">
                   <Link 
                     to="/contabil" 
-                    className="block p-2 hover:bg-gray-50 rounded-md"
+                    className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-md"
                   >
+                    <Calculator className="h-4 w-4" />
                     Dashboard Contábil
                   </Link>
                   <Link 
                     to="/relatorios" 
-                    className="block p-2 hover:bg-gray-50 rounded-md"
+                    className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-md"
                   >
+                    <BookOpen className="h-4 w-4" />
                     Relatórios Contábeis
                   </Link>
                 </div>
@@ -64,20 +72,25 @@ export const Navbar = () => {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <NavigationMenuTrigger className={path.includes("/fiscal") || path.includes("/analise") ? "text-nfe-royal" : ""}>
-                Fiscal
+                <div className="flex items-center gap-1">
+                  <Receipt className="h-4 w-4" />
+                  Fiscal
+                </div>
               </NavigationMenuTrigger>
               <NavigationMenuContent>
                 <div className="grid gap-3 p-4 w-[400px]">
                   <Link 
                     to="/fiscal" 
-                    className="block p-2 hover:bg-gray-50 rounded-md"
+                    className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-md"
                   >
+                    <Receipt className="h-4 w-4" />
                     Dashboard Fiscal
                   </Link>
                   <Link 
                     to="/analise" 
-                    className="block p-2 hover:bg-gray-50 rounded-md"
+                    className="flex items-center gap-2 p-2 hover:bg-gray-50 rounded-md"
                   >
+                    <FileText className="h-4 w-4" />
                     Análise de Notas
                   </Link>
                 </div>
@@ -85,12 +98,18 @@ export const Navbar = () => {
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link to="/dp" className={getNavLinkClass("/dp")}>
-                Departamento Pessoal
+                <div className="flex items-center gap-1">
+                  <Users className="h-4 w-4" />
+                  Departamento Pessoal
+                </div>
               </Link>
             </NavigationMenuItem>
             <NavigationMenuItem>
               <Link to="/monitor" className={getNavLinkClass("/monitor")}>
-                Monitor do Sistema
+                <div className="flex items-center gap-1">
+                  <Monitor className="h-4 w-4" />
+                  Monitor do Sistema
+                </div>
               </Link>
             </NavigationMenuItem>
           </NavigationMenuList>

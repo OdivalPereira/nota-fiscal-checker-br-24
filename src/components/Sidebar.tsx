@@ -5,7 +5,10 @@ import {
   LayoutDashboard,
   Users,
   Monitor,
-  BanknoteIcon,
+  Calculator,
+  Receipt,
+  BriefcaseIcon,
+  BookOpen,
 } from "lucide-react";
 import {
   Sidebar as SidebarComponent,
@@ -35,17 +38,27 @@ export const Sidebar = ({ children }: SidebarProps) => {
     { 
       path: "/fiscal", 
       label: "Dashboard Fiscal", 
-      icon: <FileText className="w-5 h-5" /> 
+      icon: <Receipt className="w-5 h-5" /> 
     },
     { 
       path: "/contabil", 
       label: "Dashboard Contábil", 
-      icon: <BanknoteIcon className="w-5 h-5" /> 
+      icon: <Calculator className="w-5 h-5" /> 
     },
     { 
       path: "/dp", 
       label: "Departamento Pessoal", 
       icon: <Users className="w-5 h-5" /> 
+    },
+    { 
+      path: "/analise", 
+      label: "Análise de Notas", 
+      icon: <FileText className="w-5 h-5" /> 
+    },
+    { 
+      path: "/relatorios", 
+      label: "Relatórios Contábeis", 
+      icon: <BookOpen className="w-5 h-5" /> 
     },
     { 
       path: "/monitor", 
@@ -60,7 +73,7 @@ export const Sidebar = ({ children }: SidebarProps) => {
         <SidebarComponent>
           <SidebarHeader>
             <div className="flex items-center gap-2 px-4 py-2">
-              <LayoutDashboard className="h-6 w-6 text-nfe-royal" />
+              <BriefcaseIcon className="h-6 w-6 text-nfe-royal" />
               <h1 className="text-lg font-semibold text-nfe-blue">Sistema Integrado</h1>
             </div>
           </SidebarHeader>

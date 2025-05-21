@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Filter, Table } from "lucide-react";
+import { FileText, Filter, Receipt, Calculator, BookOpen, ClipboardCheck, Calendar } from "lucide-react";
 import { NFETable } from "@/components/NFETable";
 import { fetchNFes } from "@/services/nfeService";
 import { FiscalSummary } from "@/components/FiscalSummary";
@@ -88,12 +88,30 @@ const DashboardFiscal = () => {
       
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
         <TabsList className="bg-white">
-          <TabsTrigger value="resumo">Resumo</TabsTrigger>
-          <TabsTrigger value="notas">Notas Fiscais</TabsTrigger>
-          <TabsTrigger value="sped">SPED Fiscal</TabsTrigger>
-          <TabsTrigger value="efd">EFD-Contribuições</TabsTrigger>
-          <TabsTrigger value="ciap">CIAP</TabsTrigger>
-          <TabsTrigger value="obrigacoes">Obrigações Acessórias</TabsTrigger>
+          <TabsTrigger value="resumo" className="flex items-center gap-1">
+            <Calculator className="h-4 w-4" />
+            Resumo
+          </TabsTrigger>
+          <TabsTrigger value="notas" className="flex items-center gap-1">
+            <Receipt className="h-4 w-4" />
+            Notas Fiscais
+          </TabsTrigger>
+          <TabsTrigger value="sped" className="flex items-center gap-1">
+            <FileText className="h-4 w-4" />
+            SPED Fiscal
+          </TabsTrigger>
+          <TabsTrigger value="efd" className="flex items-center gap-1">
+            <BookOpen className="h-4 w-4" />
+            EFD-Contribuições
+          </TabsTrigger>
+          <TabsTrigger value="ciap" className="flex items-center gap-1">
+            <ClipboardCheck className="h-4 w-4" />
+            CIAP
+          </TabsTrigger>
+          <TabsTrigger value="obrigacoes" className="flex items-center gap-1">
+            <Calendar className="h-4 w-4" />
+            Obrigações Acessórias
+          </TabsTrigger>
         </TabsList>
         
         <TabsContent value="resumo" className="bg-white border rounded-lg p-6">
