@@ -17,46 +17,51 @@ const DashboardFiscal = () => {
     queryFn: fetchNFes,
   });
 
-  // Dados simulados para os comparativos de impostos
+  // Dados simulados para os comparativos de impostos e NFes
   const fiscalSummaryData = {
     totalNFes: {
-      total: 847,
-      authorized: 792,
-      cancelled: 55,
-      denied: 0
+      system: {
+        total: 847,
+        authorized: 792,
+        cancelled: 55,
+        denied: 0
+      },
+      sped: {
+        total: 846,
+        authorized: 791,
+        cancelled: 55,
+        denied: 0
+      },
+      efd: {
+        total: 845,
+        authorized: 790,
+        cancelled: 55,
+        denied: 0
+      },
+      xml: {
+        total: 847,
+        authorized: 792,
+        cancelled: 55,
+        denied: 0
+      }
     },
     icms: {
       system: 127832.65,
       sped: 127452.33,
       efd: 127832.65,
-      xml: 127832.65,
-      percentage: {
-        spedVsSystem: 99.7,
-        efdVsSystem: 100,
-        xmlVsSystem: 100
-      }
+      xml: 127832.65
     },
     pisCofins: {
       system: 62475.92,
       sped: 62475.92,
       efd: 61890.41,
-      xml: 62475.92,
-      percentage: {
-        spedVsSystem: 100,
-        efdVsSystem: 99.1,
-        xmlVsSystem: 100
-      }
+      xml: 62475.92
     },
     ipi: {
       system: 43125.47,
       sped: 43125.47,
       efd: 43125.47,
-      xml: 42975.22,
-      percentage: {
-        spedVsSystem: 100,
-        efdVsSystem: 100,
-        xmlVsSystem: 99.7
-      }
+      xml: 42975.22
     }
   };
 
