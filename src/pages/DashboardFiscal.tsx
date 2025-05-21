@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { FileText, Filter, Receipt, Calculator, BookOpen, ClipboardCheck, Calendar } from "lucide-react";
+import { FileText, Filter, Receipt, Calculator, BookOpen, ClipboardCheck, Calendar, LayoutGrid } from "lucide-react";
 import { NFETable } from "@/components/NFETable";
 import { fetchNFes } from "@/services/nfeService";
 import { FiscalSummary } from "@/components/FiscalSummary";
@@ -127,7 +127,7 @@ const DashboardFiscal = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="h-64 flex items-center justify-center">
-                    <Table className="h-24 w-24 text-gray-300" />
+                    <LayoutGrid className="h-24 w-24 text-gray-300" />
                   </div>
                 </CardContent>
               </Card>
@@ -137,7 +137,7 @@ const DashboardFiscal = () => {
                 </CardHeader>
                 <CardContent>
                   <div className="h-64 flex items-center justify-center">
-                    <Table className="h-24 w-24 text-gray-300" />
+                    <LayoutGrid className="h-24 w-24 text-gray-300" />
                   </div>
                 </CardContent>
               </Card>
@@ -193,3 +193,4 @@ const DashboardFiscal = () => {
 };
 
 export default DashboardFiscal;
+
