@@ -4,7 +4,19 @@ import { useQuery } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { FileText, Filter, Receipt, Calculator, BookOpen, ClipboardCheck, Calendar, LayoutGrid } from "lucide-react";
+import { 
+  FileText, 
+  Filter, 
+  Receipt, 
+  Calculator, 
+  BookOpen, 
+  ClipboardCheck, 
+  Calendar, 
+  LayoutGrid, 
+  BarChart3,
+  LineChart,
+  PieChart 
+} from "lucide-react";
 import { NFETable } from "@/components/NFETable";
 import { fetchNFes } from "@/services/nfeService";
 import { FiscalSummary } from "@/components/FiscalSummary";
@@ -68,12 +80,19 @@ const DashboardFiscal = () => {
   return (
     <div className="bg-gray-50 p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-nfe-blue">Dashboard Fiscal</h1>
+        <h1 className="text-2xl font-bold text-nfe-blue flex items-center gap-2">
+          <Receipt className="h-6 w-6" />
+          Dashboard Fiscal
+        </h1>
         
         <div className="flex space-x-2">
-          <Button variant="outline" size="sm">
-            <Filter className="mr-2 h-4 w-4" />
+          <Button variant="outline" size="sm" className="flex items-center gap-1">
+            <Filter className="h-4 w-4" />
             Filtros
+          </Button>
+          <Button variant="outline" size="sm" className="flex items-center gap-1">
+            <Calendar className="h-4 w-4" />
+            Período
           </Button>
         </div>
       </div>
@@ -87,7 +106,7 @@ const DashboardFiscal = () => {
       />
       
       <Tabs value={activeTab} onValueChange={setActiveTab} className="space-y-4">
-        <TabsList className="bg-white">
+        <TabsList className="bg-white border shadow-sm w-full justify-start overflow-x-auto">
           <TabsTrigger value="resumo" className="flex items-center gap-1">
             <Calculator className="h-4 w-4" />
             Resumo
@@ -114,30 +133,39 @@ const DashboardFiscal = () => {
           </TabsTrigger>
         </TabsList>
         
-        <TabsContent value="resumo" className="bg-white border rounded-lg p-6">
+        <TabsContent value="resumo" className="bg-white border rounded-lg p-6 shadow-sm">
           <div className="space-y-4">
-            <h2 className="text-lg font-semibold text-nfe-blue">Resumo Fiscal</h2>
+            <h2 className="text-lg font-semibold text-nfe-blue flex items-center gap-2">
+              <Calculator className="h-5 w-5" /> 
+              Resumo Fiscal
+            </h2>
             <p className="text-gray-700">
               Visão geral dos dados fiscais do período atual. Utilize as abas para acessar relatórios específicos.
             </p>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <Card>
-                <CardHeader className="py-3">
-                  <CardTitle className="text-sm">Impostos por CFOP</CardTitle>
+              <Card className="border shadow-sm hover:shadow-md transition-shadow">
+                <CardHeader className="py-3 border-b">
+                  <CardTitle className="text-sm flex items-center gap-1">
+                    <BarChart3 className="h-4 w-4 text-nfe-royal" />
+                    Impostos por CFOP
+                  </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="p-4">
                   <div className="h-64 flex items-center justify-center">
-                    <LayoutGrid className="h-24 w-24 text-gray-300" />
+                    <PieChart className="h-24 w-24 text-gray-300" />
                   </div>
                 </CardContent>
               </Card>
-              <Card>
-                <CardHeader className="py-3">
-                  <CardTitle className="text-sm">Evolução de Créditos</CardTitle>
+              <Card className="border shadow-sm hover:shadow-md transition-shadow">
+                <CardHeader className="py-3 border-b">
+                  <CardTitle className="text-sm flex items-center gap-1">
+                    <LineChart className="h-4 w-4 text-nfe-royal" />
+                    Evolução de Créditos
+                  </CardTitle>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="p-4">
                   <div className="h-64 flex items-center justify-center">
-                    <LayoutGrid className="h-24 w-24 text-gray-300" />
+                    <LineChart className="h-24 w-24 text-gray-300" />
                   </div>
                 </CardContent>
               </Card>
@@ -145,46 +173,66 @@ const DashboardFiscal = () => {
           </div>
         </TabsContent>
         
-        <TabsContent value="notas" className="bg-white border rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-nfe-blue mb-4">Notas Fiscais</h2>
+        <TabsContent value="notas" className="bg-white border rounded-lg p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-nfe-blue mb-4 flex items-center gap-2">
+            <Receipt className="h-5 w-5" />
+            Notas Fiscais
+          </h2>
           {isLoading ? (
             <div className="flex justify-center items-center h-64">
-              <p className="text-gray-500">Carregando notas fiscais...</p>
+              <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-nfe-royal border-r-transparent"></div>
+              <p className="ml-3 text-gray-500">Carregando notas fiscais...</p>
             </div>
           ) : (
             <NFETable nfes={nfes || []} />
           )}
         </TabsContent>
         
-        <TabsContent value="sped" className="bg-white border rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-nfe-blue">SPED Fiscal</h2>
+        <TabsContent value="sped" className="bg-white border rounded-lg p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-nfe-blue flex items-center gap-2">
+            <FileText className="h-5 w-5" />
+            SPED Fiscal
+          </h2>
           <p className="text-gray-700 mb-4">Análise dos registros do SPED Fiscal.</p>
-          <div className="h-96 border rounded flex items-center justify-center">
-            <p className="text-gray-500">Dados do SPED Fiscal</p>
+          <div className="h-96 border rounded flex items-center justify-center bg-gray-50">
+            <FileText className="h-12 w-12 text-gray-300 mb-2" />
+            <p className="text-gray-500 ml-3">Dados do SPED Fiscal</p>
           </div>
         </TabsContent>
         
-        <TabsContent value="efd" className="bg-white border rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-nfe-blue">EFD-Contribuições</h2>
+        <TabsContent value="efd" className="bg-white border rounded-lg p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-nfe-blue flex items-center gap-2">
+            <BookOpen className="h-5 w-5" />
+            EFD-Contribuições
+          </h2>
           <p className="text-gray-700 mb-4">Análise dos registros de PIS/COFINS.</p>
-          <div className="h-96 border rounded flex items-center justify-center">
-            <p className="text-gray-500">Dados de EFD-Contribuições</p>
+          <div className="h-96 border rounded flex items-center justify-center bg-gray-50">
+            <BookOpen className="h-12 w-12 text-gray-300 mb-2" />
+            <p className="text-gray-500 ml-3">Dados de EFD-Contribuições</p>
           </div>
         </TabsContent>
         
-        <TabsContent value="ciap" className="bg-white border rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-nfe-blue">CIAP</h2>
+        <TabsContent value="ciap" className="bg-white border rounded-lg p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-nfe-blue flex items-center gap-2">
+            <ClipboardCheck className="h-5 w-5" />
+            CIAP
+          </h2>
           <p className="text-gray-700 mb-4">Controle de crédito de ICMS do Ativo Permanente.</p>
-          <div className="h-96 border rounded flex items-center justify-center">
-            <p className="text-gray-500">Dados do CIAP</p>
+          <div className="h-96 border rounded flex items-center justify-center bg-gray-50">
+            <ClipboardCheck className="h-12 w-12 text-gray-300 mb-2" />
+            <p className="text-gray-500 ml-3">Dados do CIAP</p>
           </div>
         </TabsContent>
         
-        <TabsContent value="obrigacoes" className="bg-white border rounded-lg p-6">
-          <h2 className="text-lg font-semibold text-nfe-blue">Obrigações Acessórias</h2>
+        <TabsContent value="obrigacoes" className="bg-white border rounded-lg p-6 shadow-sm">
+          <h2 className="text-lg font-semibold text-nfe-blue flex items-center gap-2">
+            <Calendar className="h-5 w-5" />
+            Obrigações Acessórias
+          </h2>
           <p className="text-gray-700 mb-4">Status de entrega das obrigações fiscais.</p>
-          <div className="h-96 border rounded flex items-center justify-center">
-            <p className="text-gray-500">Dados das Obrigações Acessórias</p>
+          <div className="h-96 border rounded flex items-center justify-center bg-gray-50">
+            <Calendar className="h-12 w-12 text-gray-300 mb-2" />
+            <p className="text-gray-500 ml-3">Dados das Obrigações Acessórias</p>
           </div>
         </TabsContent>
       </Tabs>
@@ -193,4 +241,3 @@ const DashboardFiscal = () => {
 };
 
 export default DashboardFiscal;
-
