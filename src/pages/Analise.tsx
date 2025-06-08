@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Navbar } from "@/components/Navbar";
+import PageLayout from "@/components/PageLayout";
 import { NFe } from "@/types/nfe";
 import { useParams, useNavigate } from "react-router-dom";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -24,57 +24,49 @@ const AnaliseDetalhada = () => {
   
   if (isLoading) {
     return (
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="container mx-auto px-4 py-6 flex-1">
-          <div className="text-center py-10">
-            <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-nfe-royal border-r-transparent"></div>
-            <p className="mt-2 text-nfe-slate">Carregando dados...</p>
-          </div>
-        </main>
-      </div>
+      <PageLayout>
+        <div className="text-center py-10">
+          <div className="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-nfe-royal border-r-transparent"></div>
+          <p className="mt-2 text-nfe-slate">Carregando dados...</p>
+        </div>
+      </PageLayout>
     );
   }
 
   if (!nfe) {
     return (
-      <div className="flex flex-col min-h-screen">
-        <Navbar />
-        <main className="container mx-auto px-4 py-6 flex-1">
-          <div className="bg-red-50 border border-red-200 text-red-800 rounded-lg p-4">
-            <h2 className="text-lg font-semibold">Nota fiscal não encontrada</h2>
-            <p className="mt-2">A nota fiscal solicitada não foi localizada no sistema.</p>
-            <Button 
-              variant="outline" 
-              className="mt-4"
-              onClick={() => navigate("/analise")}
-            >
-              Voltar para a lista
-            </Button>
-          </div>
-        </main>
-      </div>
+      <PageLayout>
+        <div className="bg-red-50 border border-red-200 text-red-800 rounded-lg p-4">
+          <h2 className="text-lg font-semibold">Nota fiscal não encontrada</h2>
+          <p className="mt-2">A nota fiscal solicitada não foi localizada no sistema.</p>
+          <Button
+            variant="outline"
+            className="mt-4"
+            onClick={() => navigate("/analise")}
+          >
+            Voltar para a lista
+          </Button>
+        </div>
+      </PageLayout>
     );
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <main className="container mx-auto px-4 py-6 flex-1">
-        <div className="flex items-center mb-6">
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="mr-2"
-            onClick={() => navigate("/analise")}
-          >
-            <ArrowLeft className="h-4 w-4 mr-1" />
-            Voltar
-          </Button>
-          <h1 className="text-2xl font-bold text-nfe-blue">
-            Análise da Nota Fiscal - {nfe.numero}
-          </h1>
-        </div>
+    <PageLayout>
+      <div className="flex items-center mb-6">
+        <Button
+          variant="outline"
+          size="sm"
+          className="mr-2"
+          onClick={() => navigate("/analise")}
+        >
+          <ArrowLeft className="h-4 w-4 mr-1" />
+          Voltar
+        </Button>
+        <h1 className="text-2xl font-bold text-nfe-blue">
+          Análise da Nota Fiscal - {nfe.numero}
+        </h1>
+      </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <Card>
@@ -399,10 +391,7 @@ const Analise = () => {
   }) || [];
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50">
-      <Navbar />
-      
-      <main className="flex-1 container mx-auto px-4 py-6">
+    <PageLayout>
         <h1 className="text-2xl font-bold text-nfe-blue mb-6">Análise de Notas Fiscais Eletrônicas</h1>
         
         <div className="bg-white p-6 rounded-lg border shadow-sm mb-6">
@@ -518,14 +507,7 @@ const Analise = () => {
             </div>
           )}
         </div>
-      </main>
-      
-      <footer className="bg-white border-t border-gray-200 py-4">
-        <div className="container mx-auto px-4 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} Sistema de Análise de NF-e • Todos os direitos reservados
-        </div>
-      </footer>
-    </div>
+    </PageLayout>
   );
 };
 

@@ -1,6 +1,6 @@
 
 import { useState } from "react";
-import { Navbar } from "@/components/Navbar";
+import PageLayout from "@/components/PageLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -10,10 +10,7 @@ const DashboardContabil = () => {
   const [activeTab, setActiveTab] = useState("resumo");
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar />
-      
-      <main className="flex-1 container mx-auto px-4 py-6">
+    <PageLayout>
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold text-nfe-blue">Dashboard Contábil</h1>
           
@@ -136,14 +133,7 @@ const DashboardContabil = () => {
             </div>
           </TabsContent>
         </Tabs>
-      </main>
-      
-      <footer className="bg-white border-t border-gray-200 py-4">
-        <div className="container mx-auto px-4 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} Sistema Integrado • Todos os direitos reservados
-        </div>
-      </footer>
-    </div>
+    </PageLayout>
   );
 };
 

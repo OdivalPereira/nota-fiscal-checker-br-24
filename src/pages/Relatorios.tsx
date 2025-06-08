@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Navbar } from "@/components/Navbar";
+import PageLayout from "@/components/PageLayout";
 import { StatusBadge } from "@/components/StatusBadge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -90,10 +90,7 @@ const Relatorios = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-50">
-      <Navbar />
-      
-      <main className="flex-1 container mx-auto px-4 py-6">
+    <PageLayout>
         <h1 className="text-2xl font-bold text-nfe-blue mb-6">Relatórios de Inconsistências</h1>
         
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
@@ -287,14 +284,7 @@ const Relatorios = () => {
             </div>
           </TabsContent>
         </Tabs>
-      </main>
-      
-      <footer className="bg-white border-t border-gray-200 py-4">
-        <div className="container mx-auto px-4 text-center text-sm text-gray-500">
-          © {new Date().getFullYear()} Sistema de Análise de NF-e • Todos os direitos reservados
-        </div>
-      </footer>
-    </div>
+    </PageLayout>
   );
 };
 
