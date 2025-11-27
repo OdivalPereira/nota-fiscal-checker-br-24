@@ -1,0 +1,232 @@
+============================= test session starts =============================
+platform win32 -- Python 3.12.10, pytest-7.4.4, pluggy-1.6.0 -- C:\Users\contabil\AppData\Local\Programs\Python\Python312\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\contabil\Documents\Projetos Antigravity\nota-fiscal-checker-br-24\backend
+plugins: anyio-4.11.0, cov-4.1.0
+collecting ... collected 3 items
+
+tests/test_nfe.py::test_create_nfe FAILED                                [ 33%]
+tests/test_nfe.py::test_read_nfes FAILED                                 [ 66%]
+tests/test_nfe.py::test_dashboard_stats PASSED                           [100%]
+
+================================== FAILURES ===================================
+_______________________________ test_create_nfe _______________________________
+
+test_db = <sqlalchemy.orm.session.Session object at 0x0000000007032E40>
+
+    def test_create_nfe(test_db):
+        empresa = test_db.query(Empresa).first()
+>       response = client.post(
+            "/api/v1/nfe/",
+            json={
+                "numero": "123",
+                "chave": "12345678901234567890123456789012345678901234",
+                "valor": 1000.0,
+                "status": "AUTORIZADA",
+                "emitente": "Empresa Teste",
+                "destinatario": "Cliente Teste",
+                "empresa_id": str(empresa.id)
+            },
+        )
+
+tests\test_nfe.py:51: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\testclient.py:590: in post
+    return super().post(
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py:1132: in post
+    return self.request(
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\testclient.py:465: in request
+    return super().request(
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py:814: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py:901: in send
+    response = self._send_handling_auth(
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py:929: in _send_handling_auth
+    response = self._send_handling_redirects(
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py:966: in _send_handling_redirects
+    response = self._send_single_request(request)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py:1002: in _send_single_request
+    response = transport.handle_request(request)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\testclient.py:342: in handle_request
+    raise exc
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\testclient.py:339: in handle_request
+    portal.call(self.app, scope, receive, send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\from_thread.py:321: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\from_thread.py:252: in _call_func
+    retval = await retval_or_awaitable
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\applications.py:276: in __call__
+    await super().__call__(scope, receive, send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\applications.py:122: in __call__
+    await self.middleware_stack(scope, receive, send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\errors.py:184: in __call__
+    raise exc
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\errors.py:162: in __call__
+    await self.app(scope, receive, _send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py:83: in __call__
+    await self.app(scope, receive, send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\exceptions.py:79: in __call__
+    raise exc
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\exceptions.py:68: in __call__
+    await self.app(scope, receive, sender)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\middleware\asyncexitstack.py:21: in __call__
+    raise e
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py:718: in __call__
+    await route.handle(scope, receive, send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py:276: in handle
+    await self.app(scope, receive, send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py:66: in app
+    response = await func(request)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py:255: in app
+    content = await serialize_response(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def serialize_response(
+        *,
+        field: Optional[ModelField] = None,
+        response_content: Any,
+        include: Optional[Union[SetIntStr, DictIntStrAny]] = None,
+        exclude: Optional[Union[SetIntStr, DictIntStrAny]] = None,
+        by_alias: bool = True,
+        exclude_unset: bool = False,
+        exclude_defaults: bool = False,
+        exclude_none: bool = False,
+        is_coroutine: bool = True,
+    ) -> Any:
+        if field:
+            errors = []
+            response_content = _prepare_response_content(
+                response_content,
+                exclude_unset=exclude_unset,
+                exclude_defaults=exclude_defaults,
+                exclude_none=exclude_none,
+            )
+            if is_coroutine:
+                value, errors_ = field.validate(response_content, {}, loc=("response",))
+            else:
+                value, errors_ = await run_in_threadpool(
+                    field.validate, response_content, {}, loc=("response",)
+                )
+            if isinstance(errors_, ErrorWrapper):
+                errors.append(errors_)
+            elif isinstance(errors_, list):
+                errors.extend(errors_)
+            if errors:
+>               raise ValidationError(errors, field.type_)
+E               pydantic.error_wrappers.ValidationError: 1 validation error for NFeResponse
+E               response
+E                 value is not a valid dict (type=type_error.dict)
+
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py:141: ValidationError
+_______________________________ test_read_nfes ________________________________
+
+test_db = <sqlalchemy.orm.session.Session object at 0x0000000007032E40>
+
+    def test_read_nfes(test_db):
+>       response = client.get("/api/v1/nfe/")
+
+tests\test_nfe.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\testclient.py:499: in get
+    return super().get(
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py:1041: in get
+    return self.request(
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\testclient.py:465: in request
+    return super().request(
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py:814: in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py:901: in send
+    response = self._send_handling_auth(
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py:929: in _send_handling_auth
+    response = self._send_handling_redirects(
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py:966: in _send_handling_redirects
+    response = self._send_single_request(request)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py:1002: in _send_single_request
+    response = transport.handle_request(request)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\testclient.py:342: in handle_request
+    raise exc
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\testclient.py:339: in handle_request
+    portal.call(self.app, scope, receive, send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\from_thread.py:321: in call
+    return cast(T_Retval, self.start_task_soon(func, *args).result())
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py:456: in result
+    return self.__get_result()
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py:401: in __get_result
+    raise self._exception
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\anyio\from_thread.py:252: in _call_func
+    retval = await retval_or_awaitable
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\applications.py:276: in __call__
+    await super().__call__(scope, receive, send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\applications.py:122: in __call__
+    await self.middleware_stack(scope, receive, send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\errors.py:184: in __call__
+    raise exc
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\errors.py:162: in __call__
+    await self.app(scope, receive, _send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\cors.py:83: in __call__
+    await self.app(scope, receive, send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\exceptions.py:79: in __call__
+    raise exc
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\middleware\exceptions.py:68: in __call__
+    await self.app(scope, receive, sender)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\middleware\asyncexitstack.py:21: in __call__
+    raise e
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\middleware\asyncexitstack.py:18: in __call__
+    await self.app(scope, receive, send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py:718: in __call__
+    await route.handle(scope, receive, send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py:276: in handle
+    await self.app(scope, receive, send)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\starlette\routing.py:66: in app
+    response = await func(request)
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py:255: in app
+    content = await serialize_response(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+    async def serialize_response(
+        *,
+        field: Optional[ModelField] = None,
+        response_content: Any,
+        include: Optional[Union[SetIntStr, DictIntStrAny]] = None,
+        exclude: Optional[Union[SetIntStr, DictIntStrAny]] = None,
+        by_alias: bool = True,
+        exclude_unset: bool = False,
+        exclude_defaults: bool = False,
+        exclude_none: bool = False,
+        is_coroutine: bool = True,
+    ) -> Any:
+        if field:
+            errors = []
+            response_content = _prepare_response_content(
+                response_content,
+                exclude_unset=exclude_unset,
+                exclude_defaults=exclude_defaults,
+                exclude_none=exclude_none,
+            )
+            if is_coroutine:
+                value, errors_ = field.validate(response_content, {}, loc=("response",))
+            else:
+                value, errors_ = await run_in_threadpool(
+                    field.validate, response_content, {}, loc=("response",)
+                )
+            if isinstance(errors_, ErrorWrapper):
+                errors.append(errors_)
+            elif isinstance(errors_, list):
+                errors.extend(errors_)
+            if errors:
+>               raise ValidationError(errors, field.type_)
+E               pydantic.error_wrappers.ValidationError: 1 validation error for NFeResponse
+E               response -> 0
+E                 value is not a valid dict (type=type_error.dict)
+
+..\..\..\..\AppData\Local\Programs\Python\Python312\Lib\site-packages\fastapi\routing.py:141: ValidationError
+=========================== short test summary info ===========================
+FAILED tests/test_nfe.py::test_create_nfe - pydantic.error_wrappers.Validatio...
+FAILED tests/test_nfe.py::test_read_nfes - pydantic.error_wrappers.Validation...
+========================= 2 failed, 1 passed in 0.98s =========================

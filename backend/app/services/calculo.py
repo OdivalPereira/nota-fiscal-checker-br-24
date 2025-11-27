@@ -12,7 +12,7 @@ def calcular_demonstrativo(valores: dict[str, float], prejuizo_acumulado: float 
     base_calculo = base_lalur - prejuizo_compensado
 
     irpj = base_calculo * 0.15
-    adicional = max(base_calculo - 20000, 0) * 0.10
+    adicional = max(base_calculo - 60000, 0) * 0.10
     csll = base_calculo * 0.09
 
     lucro_liquido = lucro_operacional - irpj - adicional - csll
