@@ -37,6 +37,18 @@ const DashboardFiscal = () => {
   });
 
   const months = [
+    { value: "2023-01", label: "Janeiro 2023" },
+    { value: "2023-02", label: "Fevereiro 2023" },
+    { value: "2023-03", label: "Março 2023" },
+    { value: "2023-04", label: "Abril 2023" },
+    { value: "2023-05", label: "Maio 2023" },
+    { value: "2023-06", label: "Junho 2023" },
+    { value: "2023-07", label: "Julho 2023" },
+    { value: "2023-08", label: "Agosto 2023" },
+    { value: "2023-09", label: "Setembro 2023" },
+    { value: "2023-10", label: "Outubro 2023" },
+    { value: "2023-11", label: "Novembro 2023" },
+    { value: "2023-12", label: "Dezembro 2023" },
     { value: "2024-01", label: "Janeiro 2024" },
     { value: "2024-02", label: "Fevereiro 2024" },
     { value: "2024-03", label: "Março 2024" },
@@ -74,8 +86,50 @@ const DashboardFiscal = () => {
     }).format(value);
   };
 
+  const exportToCSV = () => {
+    if (selectedMonths.length === 0) return;
+    
+    let csvContent = "data:text/csv;charset=utf-8,";
+    csvContent += "Mês,Faturamento,Variação\n";
+    
+    selectedMonths.sort().forEach((monthValue, index) => {
+      const month = months.find(m => m.value === monthValue);
+      const billing = billingData[monthValue];
+      const previousMonth = selectedMonths.sort()[index - 1];
+      const previousBilling = previousMonth ? billingData[previousMonth] : null;
+      const variation = previousBilling 
+        ? ((billing - previousBilling) / previousBilling * 100).toFixed(2) + "%"
+        : "-";
+      
+      csvContent += `${month?.label},${billing.toFixed(2)},${variation}\n`;
+    });
+    
+    const total = selectedMonths.reduce((sum, month) => sum + billingData[month], 0);
+    csvContent += `Total,${total.toFixed(2)},-\n`;
+    
+    const encodedUri = encodeURI(csvContent);
+    const link = document.createElement("a");
+    link.setAttribute("href", encodedUri);
+    link.setAttribute("download", `relatorio_faturamento_${new Date().toISOString().split('T')[0]}.csv`);
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
   // Dados simulados de faturamento por mês
   const billingData: { [key: string]: number } = {
+    "2023-01": 380000,
+    "2023-02": 395000,
+    "2023-03": 410000,
+    "2023-04": 425000,
+    "2023-05": 405000,
+    "2023-06": 440000,
+    "2023-07": 430000,
+    "2023-08": 415000,
+    "2023-09": 445000,
+    "2023-10": 460000,
+    "2023-11": 470000,
+    "2023-12": 485000,
     "2024-01": 450000,
     "2024-02": 520000,
     "2024-03": 480000,
@@ -378,9 +432,9 @@ const DashboardFiscal = () => {
                       <CardTitle className="text-base">
                         Relatório de Faturamento - {selectedMonths.length} mês(es) selecionado(s)
                       </CardTitle>
-                      <Button variant="outline" size="sm">
+                      <Button variant="outline" size="sm" onClick={exportToCSV}>
                         <Download className="h-4 w-4 mr-1" />
-                        Exportar
+                        Exportar CSV
                       </Button>
                     </div>
                   </CardHeader>
